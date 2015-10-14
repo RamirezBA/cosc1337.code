@@ -4,6 +4,7 @@
 # Vim
 *~
 *.swp
+*.swo
 
 # C/C++
 *.o

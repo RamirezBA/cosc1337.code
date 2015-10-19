@@ -1,19 +1,39 @@
-TARGET = test.exe
+# Makefile for COSC1337 Graphics Library
 
-CXX	  = c:\usr\local\mingw64\bin\g++.exe
-FILES = main.cpp Graphics.cpp
-OBJS = $(FILES:.cpp=.o)
+TARGET 	= test
+FILES 	= main.cpp Graphics.cpp
+OBJS	= $(FILES:.cpp=.o)
 
-GINCS   = -I/usr/local/include
-GLIBS   = -L/usr/local/lib -lfreeglut -lglu32 -lopengl32 -Wl,--subsystem,windows
+CFLAGS	= -I/usr/local/include
 
-all:  $(TARGET)
+# system specific flags
+ifeq ($(OS),Windows_NT)
+	OSTYPE = WIN
+	LDFLAGS = -lglut32 -lglu32 -lopengl32 -Wl,--subsystem,windows
+	EXEFILE = $(TARGET)exe
+	CXX = c:\usr\local\mingw32\bin\g++.exe
 
-$(TARGET):  $(OBJS)
-	$(CXX) -o $(TARGET) $(OBJS) $(GLIBS)
+else
+    UNAME_S := $(shell uname -s)
+	EXEFILE = $(TARGET)
+	CXX = g++
+    ifeq ($(UNAME_S), Linux)
+		OSTYPE = LINUX
+		LDFLAGS = -lGL -lGLU -lglut
+    endif
+    ifeq ($(UNAME_S), Darwin)
+		OSTYPE = MAC
+		CFLAGS = -Wno-deprecated-declarations
+		LDFLAGS = -framework OpenGL -framework GLUT
+    endif
+endif
 
-%.o:    %.cpp
-	$(CXX) -c $< -o $@ $(GINCS)
+$(EXEFILE):	$(OBJS)
+	$(CXX) -o $(EXEFILE) $(OBJS) $(LDFLAGS)
+	
+%.o:	%.cpp
+	g++ -c $< -o $@ $(CFLAGS)
 
+.PHONY:
 clean:
-	del $(TARGET) $(OBJS)
+	$(RM) $(OBJS) $(EXEFILE)

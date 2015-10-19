@@ -1,4 +1,8 @@
+#if defined (__APPLE__)
+#include <GLUT/glut.h>
+#else
 #include <GL/glut.h>
+#endif
 
 // set the pre-defined colors
 enum ColorName {

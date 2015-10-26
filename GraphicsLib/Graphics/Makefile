@@ -1,18 +1,37 @@
-TARGET = test.exe
+# Makefile for building Graphics demo on command line
+FILES 	= main.cpp Graphics.cpp
+OBJS	= $(FILES:.cpp=.o)
+TARGET 	= demo
 
-FILES = main.cpp Graphics.cpp
-OBJS = $(FILES:.cpp=.o)
+ifeq ($(OS), Windows_NT)
+	EXT = .exe
+	RM	= del
+	CFLAGS =
+	LDFLAGS = -glut32 -lglu32 0lopengl32 -Wl,--subsystem,windows
+	CXX = c:\usr\local\mingw32\bin\g++.exe
+else
+	EXT =
+	RM 	= rm -f
+	CXX = g++
+	CFLAGS = -I/usr/local/include
+	UNAME_S := $(shell uname -s)
+	ifeq ($(UNAME_S), Linux)
+		LFLAGS = -lGL -lGLU, -lglut
+	endif
+	ifeq ($(UNAME_S), Darwin)
+		CFLAGS += -Wno-deprecated-declarations
+		LFLAGS = -framework OpenGL -framework GLUT
+	endif
+endif
 
-GINCS   = -I/usr/local/include
-GLIBS   = -L/usr/local/lib -lfreeglut -lglu32 -lopengl32 
+all:	demo$(EXT)
 
-all:  $(TARGET)
+$(TARGET)$(EXT):	$(OBJS)
+	g++ -o $(TARGET)$(EXT) $(OBJS) $(LFLAGS)
 
-$(TARGET):  $(OBJS)
-	g++ -o $(TARGET) $(OBJS) $(GLIBS)
-
-%.o:    %.cpp
-	g++ -c $< -o $@ $(GINCS)
+%.o:	%.cpp
+	g++ -c $< -o $@ $(CFLAGS)
 
 clean:
-	rm -f $(TARGET) $(OBJS)
+	$(RM) $(TARGET)$(EXT) $(OBJS)
+

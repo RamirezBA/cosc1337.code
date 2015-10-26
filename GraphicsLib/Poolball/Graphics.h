@@ -3,11 +3,9 @@
 
 #include <iostream>
 #if defined (_WIN32)
-    #include <GL/glut.h>
-#elif defined (__linux__)
-    #include <GL/glut.h>
-#elif defined(__APPLE__)
-    #include <GLUT/glut.h>
+#include <GL/glut.h>
+#else
+#include <GLUT/glut.h>
 #endif
 #include <stdlib.h>
 

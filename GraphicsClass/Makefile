@@ -16,8 +16,7 @@ else
 	CFLAGS = -I/usr/local/include
 	UNAME_S := $(shell uname -s)
 	ifeq ($(UNAME_S), Linux)
-	    CFLAGS = -I/usr/include
-		LFLAGS = -lGL -lGLU -lglut
+		LFLAGS = -lGL -lGLU, -lglut
 	endif
 	ifeq ($(UNAME_S), Darwin)
 		CFLAGS += -Wno-deprecated-declarations

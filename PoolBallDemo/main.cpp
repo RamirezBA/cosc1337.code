@@ -1,7 +1,7 @@
 #include "cosc1337.h"
 
 int main( int argc, char *argv[] ) {
-    cout << "Demo of Poolball SImulator" << endl;
+    cout << "Demo of Poolball Simulator" << endl;
 
     // create objects
     Poolball ball;

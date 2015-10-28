@@ -42,6 +42,13 @@ void clearWindow() {
      glClear(GL_COLOR_BUFFER_BIT);
 }
 
+void pause_ms( int milliseconds ) {
+    clock_t time_end;
+    time_end = clock() + milliseconds * CLOCKS_PER_SEC/1000;
+    while( clock() < time_end ){}
+}
+
+// drawing routines follow ----------------------------------------------------
 void drawTriangle(int x1, int y1, int x2, int y2, int x3, int y3) {
      glBegin(GL_LINE_STRIP);
      glVertex2i(x1,y1);

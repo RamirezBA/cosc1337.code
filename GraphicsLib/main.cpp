@@ -17,6 +17,7 @@ void animate() {
     xPos += xSpeed;
     yPos += ySpeed;
     glutPostRedisplay();
+    pause_ms(16);
 }
 
 // keyboard handler to terminate the program when "q" key is pressed
@@ -35,5 +36,5 @@ int main(int argc, char **argv) {
     glutIdleFunc(animate);          // Move objects when animating
     glutKeyboardFunc(handleKey);    // set up the "q" key to quit
     glutMainLoop();                 // GLUT will control the action
-    glutSwapBuffers();              // double buffering control
+    //glutSwapBuffers();              // double buffering control
 }

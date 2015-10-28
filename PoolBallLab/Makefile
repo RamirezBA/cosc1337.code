@@ -1,5 +1,5 @@
 # Makefile for building Graphics demo on command line
-FILES 	= main.cpp Graphics.cpp
+FILES 	= $(wildcard *.cpp)
 OBJS	= $(FILES:.cpp=.o)
 TARGET 	= demo
 

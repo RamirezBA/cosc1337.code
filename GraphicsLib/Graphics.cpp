@@ -1,5 +1,6 @@
 #include "Graphics.h"
 #include <cmath>
+#include <time.h>
 
 const double PI = acos(-1.0);
 const double ANGLE_STEP      = PI/180.0;

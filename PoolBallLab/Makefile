@@ -1,13 +1,14 @@
 # Makefile for building Graphics demo on command line
-FILES 	= $(wildcard *.cpp)
+FILES 	= main.cpp Graphics.cpp
 OBJS	= $(FILES:.cpp=.o)
 TARGET 	= demo
 
 ifeq ($(OS), Windows_NT)
 	EXT = .exe
 	RM	= del
-	CFLAGS =
-	LDFLAGS = -glut32 -lglu32 -lopengl32 -Wl,--subsystem,windows
+	CFLAGS = -I/usr/local/include
+	LFLAGS = -L/usr/local/lib
+	LFLAGS += -lfreeglut -lglu32 -lopengl32 -Wl,--subsystem,windows
 	CXX = c:\usr\local\mingw32\bin\g++.exe
 else
 	EXT =

@@ -35,8 +35,12 @@ $(TEST_TARGET):	$(TOBJS)
 clean:
 	$(RM) $(APP_TARGET) $(TEST_TARGET) 
 	$(RM) $(OBJS) $(TOBJS)
+
+make.deps:	$(FILES) $(TESTS)
+	$(CXX) -MM $(CFLAGS) $^ > make.deps
+
 # implicit rules --------------------------------
 
-%.o:	%.cpp
+%.o:	%.cpp make.deps
 	$(CXX) -c $(CFLAGS) $< -o $@
 

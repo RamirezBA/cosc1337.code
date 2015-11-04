@@ -1,0 +1,5 @@
+Complex.o: src/Complex.cpp include/Complex.h
+main.o: src/main.cpp include/Complex.h
+test_complex.o: tests/test_complex.cpp include/catch.hpp \
+  include/Complex.h
+test_main.o: tests/test_main.cpp include/catch.hpp

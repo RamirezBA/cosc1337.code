@@ -1,5 +1,6 @@
 // Complex.h - complex number class
 #include <iostream>
+#include <string>
 using namespace std;
 
 class Complex {
